@@ -74,9 +74,9 @@ public class MainActivity extends BaseActivity {
         fragments[2] = new ThirdFragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.main_layout, fragments[0]);
-        transaction.add(R.id.main_layout, fragments[1]);
-        transaction.add(R.id.main_layout, fragments[2]);
+        transaction.add(R.id.fragment_layout, fragments[0]);
+        transaction.add(R.id.fragment_layout, fragments[1]);
+        transaction.add(R.id.fragment_layout, fragments[2]);
         hideAllFragments(transaction);
         transaction.commit();
     }
@@ -107,4 +107,5 @@ public class MainActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 }
