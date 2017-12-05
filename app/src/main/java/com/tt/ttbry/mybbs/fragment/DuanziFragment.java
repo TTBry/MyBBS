@@ -56,12 +56,27 @@ public class DuanziFragment extends BaseFragment {
             }
         });
         mRvShowDuanzi.setAdapter(adapter);
+        mRvShowDuanzi.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                LinearLayoutManager lm = (LinearLayoutManager) mRvShowDuanzi.getLayoutManager();
+                int totalCount = mRvShowDuanzi.getAdapter().getItemCount();
+                int lastVisibleItemPosition = lm.findLastVisibleItemPosition();
+                int visibleCount = mRvShowDuanzi.getChildCount();
+                if(newState == RecyclerView.SCROLL_STATE_IDLE
+                        && lastVisibleItemPosition == totalCount - 1
+                        && visibleCount > 0){
+                    getDuanzi();
+                }
+            }
+        });
 
         mRefresh = view.findViewById(R.id.duanzi_refresh);
         mRefresh.setColorSchemeResources(R.color.colorPrimary);
         mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                duanziList.clear();
                 getDuanzi();
                 mRefresh.setRefreshing(false);
             }
@@ -80,7 +95,6 @@ public class DuanziFragment extends BaseFragment {
                     if("success".equals(object.getString("message"))){
                         JSONObject obj = object.getJSONObject("data");
                         JSONArray array = obj.getJSONArray("data");
-                        duanziList.clear();
                         duanziList.addAll(JSON.parseArray(array.toJSONString(), Duanzi.class));
                         adapter.notifyDataSetChanged();
                     }else{

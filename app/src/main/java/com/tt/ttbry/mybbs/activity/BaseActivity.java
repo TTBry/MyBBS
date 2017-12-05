@@ -1,4 +1,4 @@
-package com.tt.ttbry.mybbs.ui;
+package com.tt.ttbry.mybbs.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;

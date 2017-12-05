@@ -1,4 +1,4 @@
-package com.tt.ttbry.mybbs.ui;
+package com.tt.ttbry.mybbs.activity;
 
 import android.os.Bundle;
 import android.webkit.WebSettings;

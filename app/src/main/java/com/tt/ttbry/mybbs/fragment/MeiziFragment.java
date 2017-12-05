@@ -2,6 +2,7 @@ package com.tt.ttbry.mybbs.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.TextUtils;
@@ -20,18 +21,33 @@ import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by TTBry on 2017/12/5.
  */
 
 public class MeiziFragment extends BaseFragment {
-    private static final int MEIZI_COUNT = 20;
+    private static final int MEIZI_COUNT = 10;
+    private static final int PAGE_NUM = 57;
     private int page = 1;
     private List<Meizi> meiziList = new ArrayList<>();
 
     private RecyclerView recyclerView;
     private MeiziAdapter adapter;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getRandomPage();
+    }
+
+    private void getRandomPage(){
+        Random random = new Random();
+        page = random.nextInt() % PAGE_NUM + 1;
+    }
 
     @Nullable
     @Override
@@ -87,6 +103,18 @@ public class MeiziFragment extends BaseFragment {
                 }
             }
         });
+
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                meiziList.clear();
+                getRandomPage();
+                getMeizi();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void getMeizi(){
@@ -97,8 +125,13 @@ public class MeiziFragment extends BaseFragment {
                     JSONObject object = JSON.parseObject(content);
                     if(!object.getBoolean("error")){
                         JSONArray array = object.getJSONArray("results");
-                        meiziList.addAll(JSON.parseArray(array.toJSONString(), Meizi.class));
-                        adapter.notifyDataSetChanged();
+                        List<Meizi> tmp = JSON.parseArray(array.toJSONString(), Meizi.class);
+                        if(tmp == null || tmp.size() == 0){
+                            showToast(getString(R.string.no_more_data));
+                        }else {
+                            meiziList.addAll(tmp);
+                            adapter.notifyDataSetChanged();
+                        }
                     }else{
                         showToast(getString(R.string.server_error));
                     }

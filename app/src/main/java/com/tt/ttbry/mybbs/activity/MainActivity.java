@@ -1,5 +1,6 @@
-package com.tt.ttbry.mybbs.ui;
+package com.tt.ttbry.mybbs.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +11,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.tt.ttbry.mybbs.R;
@@ -116,6 +118,18 @@ public class MainActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private long lastPressedTime = 0;
+    @Override
+    public void onBackPressed() {
+        long now = System.currentTimeMillis();
+        if((now - lastPressedTime ) < 2 * 1000){
+            finish();
+        }else{
+            showToast(getString(R.string.quit_app_tip));
+            lastPressedTime = now;
+        }
     }
 
 }

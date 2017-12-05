@@ -8,11 +8,11 @@
     android:orientation="vertical"
     >
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        />
+        />-->
 
     <uk.co.senab.photoview.PhotoView
         android:id="@+id/detail_pv_show_photo"
@@ -22,10 +22,10 @@
         android:layout_gravity="center"
         />
 
-    <ImageView
+    <!--<ImageView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.2"
-        />
+        />-->
 
 </LinearLayout>

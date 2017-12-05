@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.MainActivity"
+        <activity android:name=".activity.MainActivity"
             android:hardwareAccelerated="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.TieActivity" />
-        <activity android:name=".ui.DetailActivity" />
+        <activity android:name=".activity.TieActivity" />
+        <activity android:name=".activity.DetailActivity" />
     </application>
 
 </manifest>

@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyBBS.iml" filepath="$PROJECT_DIR$/MyBBS.iml" />
+      <module fileurl="file://D:\Development\AndroidDemos\MyBBS\MyBBS.iml" filepath="D:\Development\AndroidDemos\MyBBS\MyBBS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Development\AndroidDemos\MyBBS\app\app.iml" filepath="D:\Development\AndroidDemos\MyBBS\app\app.iml" />
     </modules>
   </component>
 </project>

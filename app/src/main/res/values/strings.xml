@@ -10,4 +10,6 @@
     <string name="error">异常：</string>
     <string name="server_error">服务器异常</string>
     <string name="nav_title_duanzi">段子</string>
+    <string name="quit_app_tip">再按一次退出应用</string>
+    <string name="no_more_data">没有更多了...</string>
 </resources>
