@@ -34,4 +34,5 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.2.41'
     implementation 'com.parse.bolts:bolts-tasks:1.4.0'
     implementation 'com.github.chrisbanes:PhotoView:1.2.6'
+    implementation 'de.hdodenhof:circleimageview:2.1.0'
 }

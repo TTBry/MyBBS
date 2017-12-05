@@ -1,20 +1,37 @@
 package com.tt.ttbry.mybbs.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.tt.ttbry.mybbs.R;
+import com.tt.ttbry.mybbs.adapter.DuanziAdapter;
+import com.tt.ttbry.mybbs.config.API;
+import com.tt.ttbry.mybbs.model.Duanzi;
+import com.tt.ttbry.mybbs.util.HttpUtil;
 
-public class DuanziFragment extends Fragment {
-    private WebView webView;
-    private String url = "https://www.douyu.com/";
+import java.util.ArrayList;
+import java.util.List;
+
+public class DuanziFragment extends BaseFragment {
+
+    private RecyclerView mRvShowDuanzi;
+    private SwipeRefreshLayout mRefresh;
+    private DuanziAdapter adapter;
+
+    private List<Duanzi> duanziList = new ArrayList<>();
+
+    public static DuanziFragment newInstance() {
+        return new DuanziFragment();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -24,25 +41,62 @@ public class DuanziFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        View view = inflater.inflate(R.layout.duanzi_fragment_layout, container, false);
         initView(view);
+        getDuanzi();
         return view;
     }
     private void initView(View view){
-        webView = view.findViewById(R.id.web_view);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(true);
-        settings.setDatabaseEnabled(true);
-        settings.setAppCacheEnabled(true);
-        settings.setAllowFileAccess(true);
-        settings.setPluginState(WebSettings.PluginState.ON);
-        settings.setDomStorageEnabled(true);
-        if(Build.VERSION.SDK_INT >= 21) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
+        mRvShowDuanzi = view.findViewById(R.id.duanzi_rv_show_duanzi);
+        mRvShowDuanzi.setLayoutManager(new LinearLayoutManager(getActivity()));
+        adapter = new DuanziAdapter(this, duanziList, new DuanziAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+        mRvShowDuanzi.setAdapter(adapter);
+
+        mRefresh = view.findViewById(R.id.duanzi_refresh);
+        mRefresh.setColorSchemeResources(R.color.colorPrimary);
+        mRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDuanzi();
+                mRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    /**
+     * 获取段子列表
+     */
+    private void getDuanzi(){
+        httpUtil.get(API.GET_DUANZI, new HttpUtil.OnResponseHandler() {
+            @Override
+            public void onSuccess(String content) {
+                if(!TextUtils.isEmpty(content)){
+                    JSONObject object = JSON.parseObject(content);
+                    if("success".equals(object.getString("message"))){
+                        JSONObject obj = object.getJSONObject("data");
+                        JSONArray array = obj.getJSONArray("data");
+                        duanziList.clear();
+                        duanziList.addAll(JSON.parseArray(array.toJSONString(), Duanzi.class));
+                        adapter.notifyDataSetChanged();
+                    }else{
+                        showToast(getString(R.string.server_error));
+                    }
+                }else{
+                    showToast(getString(R.string.no_data));
+                }
+            }
+
+            @Override
+            public void onFailure(Throwable error) {
+                error.printStackTrace();
+                showToast(getString(R.string.error) + error.getMessage());
+            }
+        });
     }
 
 }

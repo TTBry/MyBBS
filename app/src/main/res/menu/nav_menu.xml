@@ -6,9 +6,9 @@
             android:icon="@drawable/nav_news"
             android:title="@string/nav_title_news" />
         <item
-            android:id="@+id/nav_second"
-            android:icon="@drawable/friends"
-            android:title="Second" />
+            android:id="@+id/nav_duanzi"
+            android:icon="@drawable/nav_duanzi"
+            android:title="@string/nav_title_duanzi" />
         <item
             android:id="@+id/nav_third"
             android:icon="@drawable/location"

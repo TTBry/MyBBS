@@ -57,7 +57,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_news:
                         showFragment(0);
                         break;
-                    case R.id.nav_second:
+                    case R.id.nav_duanzi:
                         showFragment(1);
                         break;
                     case R.id.nav_third:
