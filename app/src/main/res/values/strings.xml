@@ -2,5 +2,11 @@
     <string name="app_name">MyBBS</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nav_title_news">News</string>
+    <string name="nav_title_meizi">妹子</string>
+    <string name="network_not_available">网断掉啦！！！</string>
+    <string name="network_error">网络异常：</string>
+    <string name="no_data">数据为空</string>
+    <string name="error">异常：</string>
+    <string name="server_error">服务器异常</string>
 </resources>

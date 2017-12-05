@@ -12,7 +12,7 @@ import android.webkit.WebViewClient;
 
 import com.tt.ttbry.mybbs.R;
 
-public class SecondFragment extends Fragment {
+public class DuanziFragment extends Fragment {
     private WebView webView;
     private String url = "https://www.douyu.com/";
 

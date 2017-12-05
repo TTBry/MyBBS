@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first"
-            android:icon="@drawable/call"
-            android:title="First" />
+            android:id="@+id/nav_news"
+            android:icon="@drawable/nav_news"
+            android:title="@string/nav_title_news" />
         <item
             android:id="@+id/nav_second"
             android:icon="@drawable/friends"
@@ -13,5 +13,9 @@
             android:id="@+id/nav_third"
             android:icon="@drawable/location"
             android:title="Third" />
+        <item
+            android:id="@+id/nav_meizi"
+            android:icon="@drawable/nav_meizi"
+            android:title="@string/nav_title_meizi" />
     </group>
 </menu>

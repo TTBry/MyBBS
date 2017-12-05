@@ -13,14 +13,18 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.tt.ttbry.mybbs.R;
-import com.tt.ttbry.mybbs.fragment.FirstFragment;
-import com.tt.ttbry.mybbs.fragment.SecondFragment;
+import com.tt.ttbry.mybbs.fragment.MeiziFragment;
+import com.tt.ttbry.mybbs.fragment.NewsFragment;
+import com.tt.ttbry.mybbs.fragment.DuanziFragment;
 import com.tt.ttbry.mybbs.fragment.ThirdFragment;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private ImageView navHeaderImage;
-    private Fragment[] fragments = new Fragment[3];
+    private List<Fragment> fragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +49,12 @@ public class MainActivity extends BaseActivity {
 
         drawerLayout = findViewById(R.id.drawer_layout);
         NavigationView navView = findViewById(R.id.nav_view);
-        navView.setCheckedItem(R.id.nav_first);
+        navView.setCheckedItem(R.id.nav_news);
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.nav_first:
+                    case R.id.nav_news:
                         showFragment(0);
                         break;
                     case R.id.nav_second:
@@ -58,6 +62,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case R.id.nav_third:
                         showFragment(2);
+                        break;
+                    case R.id.nav_meizi:
+                        showFragment(3);
                         break;
                     default:
                         break;
@@ -69,14 +76,17 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initFragment(){
-        fragments[0] = new FirstFragment();
-        fragments[1] = new SecondFragment();
-        fragments[2] = new ThirdFragment();
+        fragments = new ArrayList<>();
+        fragments.add(new NewsFragment());
+        fragments.add(new DuanziFragment());
+        fragments.add(new ThirdFragment());
+        fragments.add(new MeiziFragment());
+
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.fragment_layout, fragments[0]);
-        transaction.add(R.id.fragment_layout, fragments[1]);
-        transaction.add(R.id.fragment_layout, fragments[2]);
+        for(Fragment fragment : fragments) {
+            transaction.add(R.id.fragment_layout, fragment);
+        }
         hideAllFragments(transaction);
         transaction.commit();
     }
@@ -92,7 +102,7 @@ public class MainActivity extends BaseActivity {
     private void showFragment(int position){
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         hideAllFragments(transaction);
-        transaction.show(fragments[position]);
+        transaction.show(fragments.get(position));
         transaction.commit();
     }
 

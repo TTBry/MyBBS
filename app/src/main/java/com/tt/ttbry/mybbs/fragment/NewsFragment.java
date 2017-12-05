@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tt.ttbry.mybbs.Config;
+import com.tt.ttbry.mybbs.config.API;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.ArticleAdapter;
 import com.tt.ttbry.mybbs.model.Article;
@@ -24,7 +24,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FirstFragment extends Fragment {
+public class NewsFragment extends Fragment {
     public static final int GET_DATA_SUCCESS = 1;
 
     private List<Article> articles = new ArrayList<>();
@@ -41,7 +41,7 @@ public class FirstFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_first, container, false);
+        View view = inflater.inflate(R.layout.new_fragment_layout, container, false);
 
         initView(view);
         getArticles();
@@ -86,7 +86,7 @@ public class FirstFragment extends Fragment {
                 try{
                     Document document = Jsoup.connect(getUrl()).get();
                     Elements elements = document.select("article.excerpt");
-                    Log.d("FirstFragment", elements.html());
+                    Log.d("NewsFragment", elements.html());
                     for(int i = 0; i < elements.size(); i++){
                         Element h2 = elements.get(i).select("h2").get(0);
                         String title = h2.select("a").get(0).text();
@@ -108,9 +108,9 @@ public class FirstFragment extends Fragment {
     private String getUrl(){
 
         if(currentPage == 1){
-            return Config.CCNOVEL_TRANSLATE + "index.html";
+            return API.CCNOVEL_TRANSLATE + "index.html";
         }
-        return Config.CCNOVEL_TRANSLATE + "index_" + currentPage + ".html";
+        return API.CCNOVEL_TRANSLATE + "index_" + currentPage + ".html";
     }
 
     private Handler handler = new Handler(){
