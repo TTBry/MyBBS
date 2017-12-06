@@ -21,7 +21,6 @@ import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Created by TTBry on 2017/12/5.
@@ -29,7 +28,7 @@ import java.util.Random;
 
 public class MeiziFragment extends BaseFragment {
     private static final int MEIZI_COUNT = 10;
-    private static final int PAGE_NUM = 57;
+    private static final int PAGE_NUM = 47;
     private int page = 1;
     private List<Meizi> meiziList = new ArrayList<>();
 
@@ -45,8 +44,9 @@ public class MeiziFragment extends BaseFragment {
     }
 
     private void getRandomPage(){
-        Random random = new Random();
-        page = random.nextInt() % PAGE_NUM + 1;
+        page = 1;
+        /*Random random = new Random();
+        page = random.nextInt() % PAGE_NUM + 1;*/
     }
 
     @Nullable

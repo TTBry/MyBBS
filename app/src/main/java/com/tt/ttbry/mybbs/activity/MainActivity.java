@@ -1,6 +1,5 @@
 package com.tt.ttbry.mybbs.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -11,14 +10,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.tt.ttbry.mybbs.R;
+import com.tt.ttbry.mybbs.fragment.DuanziFragment;
 import com.tt.ttbry.mybbs.fragment.MeiziFragment;
 import com.tt.ttbry.mybbs.fragment.NewsFragment;
-import com.tt.ttbry.mybbs.fragment.DuanziFragment;
-import com.tt.ttbry.mybbs.fragment.ThirdFragment;
+import com.tt.ttbry.mybbs.fragment.TvFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +60,7 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_duanzi:
                         showFragment(1);
                         break;
-                    case R.id.nav_third:
+                    case R.id.nav_tv:
                         showFragment(2);
                         break;
                     case R.id.nav_meizi:
@@ -81,7 +79,7 @@ public class MainActivity extends BaseActivity {
         fragments = new ArrayList<>();
         fragments.add(new NewsFragment());
         fragments.add(new DuanziFragment());
-        fragments.add(new ThirdFragment());
+        fragments.add(new TvFragment());
         fragments.add(new MeiziFragment());
 
 

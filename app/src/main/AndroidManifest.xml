@@ -24,6 +24,10 @@
         </activity>
         <activity android:name=".activity.TieActivity" />
         <activity android:name=".activity.DetailActivity" />
+        <activity android:name=".activity.TvActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:hardwareAccelerated="true"/>
     </application>
 
 </manifest>

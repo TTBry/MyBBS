@@ -3,7 +3,6 @@ package com.tt.ttbry.mybbs.fragment;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tt.ttbry.mybbs.config.API;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.ArticleAdapter;
+import com.tt.ttbry.mybbs.config.API;
 import com.tt.ttbry.mybbs.model.Article;
 
 import org.jsoup.Jsoup;
@@ -24,7 +23,7 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsFragment extends Fragment {
+public class NewsFragment extends BaseFragment {
     public static final int GET_DATA_SUCCESS = 1;
 
     private List<Article> articles = new ArrayList<>();

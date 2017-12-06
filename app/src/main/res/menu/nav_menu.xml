@@ -10,9 +10,9 @@
             android:icon="@drawable/nav_duanzi"
             android:title="@string/nav_title_duanzi" />
         <item
-            android:id="@+id/nav_third"
-            android:icon="@drawable/location"
-            android:title="Third" />
+            android:id="@+id/nav_tv"
+            android:icon="@drawable/nav_tv"
+            android:title="@string/tttv" />
         <item
             android:id="@+id/nav_meizi"
             android:icon="@drawable/nav_meizi"
