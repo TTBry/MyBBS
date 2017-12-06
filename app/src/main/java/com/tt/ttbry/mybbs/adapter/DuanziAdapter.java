@@ -5,10 +5,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tt.ttbry.mybbs.R;
+import com.tt.ttbry.mybbs.model.CommentBean;
 import com.tt.ttbry.mybbs.model.Duanzi;
 import com.tt.ttbry.mybbs.util.Check;
 
@@ -45,7 +48,6 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
 
     @Override
     public void onBindViewHolder(DuanziViewHolder holder, int position) {
-        RecyclerView rvTest = (RecyclerView) holder.itemView.getParent();
         try {
             Duanzi duanziBean = mDuanziBeanList.get(position);
             if (!Check.isEmpty(duanziBean.getGroupBean().getUser().getAvatar_url())) {
@@ -53,6 +55,21 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
             }
             holder.mTvContent.setText(duanziBean.getGroupBean().getText());
             holder.mTvAuthor.setText(duanziBean.getGroupBean().getUser().getName());
+
+            if(duanziBean.getGroupBean().getHasComments() > 0){
+                holder.mLlComment.setVisibility(View.VISIBLE);
+                CommentBean commentBean = duanziBean.getCommentBeans().get(0);
+                if (!Check.isEmpty(commentBean.getUserImage())){
+                    Glide.with(mFragment).load(commentBean.getUserImage()).into(holder.mCivCommentAvatar);
+                }
+                if (!Check.isEmpty(commentBean.getMedalBeans()) && !Check.isEmpty(commentBean.getMedalBeans().get(0).getSmallIconUrl())){
+                    Glide.with(mFragment).load(commentBean.getMedalBeans().get(0).getSmallIconUrl()).into(holder.mIvCommentMedal);
+                }
+                holder.mTvCommentAuthor.setText(commentBean.getUserName());
+                holder.mTvCommentContent.setText(commentBean.getText());
+            }else{
+                holder.mLlComment.setVisibility(View.GONE);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -69,11 +86,22 @@ public class DuanziAdapter extends RecyclerView.Adapter<DuanziAdapter.DuanziView
         private TextView mTvAuthor;
         private TextView mTvContent;
 
+        private LinearLayout mLlComment;
+        private CircleImageView mCivCommentAvatar;
+        private TextView mTvCommentAuthor;
+        private TextView mTvCommentContent;
+        private ImageView mIvCommentMedal;
+
         public DuanziViewHolder(View itemView) {
             super(itemView);
             mCivAvatar = itemView.findViewById(R.id.duanzi_civ_avatar);
             mTvAuthor = itemView.findViewById(R.id.duanzi_tv_author);
             mTvContent = itemView.findViewById(R.id.duanzi_tv_content);
+            mLlComment = itemView.findViewById(R.id.duanzi_comment_ll);
+            mCivCommentAvatar = itemView.findViewById(R.id.duanzi_comment_civ_avatar);
+            mTvCommentAuthor = itemView.findViewById(R.id.duanzi_comment_tv_author);
+            mTvCommentContent = itemView.findViewById(R.id.duanzi_comment_tv_content);
+            mIvCommentMedal = itemView.findViewById(R.id.duanzi_comment_iv_medal);
         }
 
         @Override

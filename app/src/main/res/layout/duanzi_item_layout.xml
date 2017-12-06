@@ -23,6 +23,7 @@
             android:id="@+id/duanzi_tv_author"
             android:paddingLeft="8dp"
             android:paddingStart="8dp"
+            android:text="路还长呐"
             android:layout_width="match_parent"
             android:layout_height="16dp"
             android:layout_gravity="center_vertical" />
@@ -33,11 +34,67 @@
         android:id="@+id/duanzi_tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="儿子：爸爸，我到底是从哪里来的？爸爸：你也长大了，爸爸就告诉你实话吧，你是网上下载的。儿子：可是，我们家没有网络啊。妈妈：傻孩子，是蹭了隔壁叔叔家的WIFI。爸爸：好像哪里有点不对啊……"
         android:textSize="17sp"
         android:lineSpacingMultiplier="1.2"
         android:paddingBottom="10dp"
         android:paddingLeft="40dp"
         android:paddingRight="10dp" />
+
+    <LinearLayout
+        android:id="@+id/duanzi_comment_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp"
+        android:background="@color/gray_light"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="8dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/duanzi_comment_civ_avatar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/avatar"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/duanzi_comment_tv_author"
+                android:paddingLeft="8dp"
+                android:paddingStart="8dp"
+                android:text="路还长呐"
+                android:layout_width="0dp"
+                android:layout_height="16dp"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:gravity="left"/>
+            
+            <ImageView
+                android:id="@+id/duanzi_comment_iv_medal"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/duanzi_comment_tv_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="儿子：爸爸，我到底是从哪里来的？爸爸：你也长大了，爸爸就告诉你实话吧爸爸：好像哪里有点不对啊……"
+            android:textSize="15sp"
+            android:lineSpacingMultiplier="1.2"
+            android:paddingBottom="10dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="10dp" />
+
+    </LinearLayout>
 
     <include layout="@layout/layout_app_divide"/>
 

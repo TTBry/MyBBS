@@ -1,5 +1,7 @@
 package com.tt.ttbry.mybbs.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 /**
  * Created by TTBry on 2017/12/5.
  */
@@ -8,6 +10,8 @@ public class GroupBean {
     private String text;
     private long id;
     private UserBean user;
+    @JSONField(name="has_comments")
+    private int hasComments;
 
     public void setText(String text) {
         this.text = text;
@@ -28,6 +32,14 @@ public class GroupBean {
 
     public void setUser(UserBean user) {
         this.user = user;
+    }
+
+    public void setHasComments(int hasComments) {
+        this.hasComments = hasComments;
+    }
+
+    public int getHasComments() {
+        return hasComments;
     }
 
     public UserBean getUser() {
