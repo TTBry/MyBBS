@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity {
         fragments.add(new TvFragment());
         fragments.add(new MeiziFragment());
 
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         for(Fragment fragment : fragments) {
             transaction.add(R.id.fragment_layout, fragment);
