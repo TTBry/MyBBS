@@ -9,6 +9,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -17,6 +18,7 @@ import com.tt.ttbry.mybbs.fragment.DuanziFragment;
 import com.tt.ttbry.mybbs.fragment.MeiziFragment;
 import com.tt.ttbry.mybbs.fragment.NewsFragment;
 import com.tt.ttbry.mybbs.fragment.TvFragment;
+import com.tt.ttbry.mybbs.util.CacheUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +77,12 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void initFragment(){
         fragments = new ArrayList<>();
         fragments.add(new NewsFragment());
@@ -111,6 +119,9 @@ public class MainActivity extends BaseActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
+            case R.id.clean_cache:
+                clearCache();
+                break;
             default:
                 break;
         }
@@ -126,6 +137,16 @@ public class MainActivity extends BaseActivity {
         }else{
             showToast(getString(R.string.quit_app_tip));
             lastPressedTime = now;
+        }
+    }
+
+    private void clearCache(){
+        try {
+            String cacheSize = CacheUtil.getTotalCacheSize(this);
+            CacheUtil.clearAllCache(this);
+            showToast(getString(R.string.cache_cleared) + cacheSize);
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

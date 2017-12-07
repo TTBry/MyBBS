@@ -20,7 +20,9 @@ import com.tt.ttbry.mybbs.model.Meizi;
 import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by TTBry on 2017/12/5.
@@ -37,18 +39,6 @@ public class MeiziFragment extends BaseFragment {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getRandomPage();
-    }
-
-    private void getRandomPage(){
-        page = 1;
-        /*Random random = new Random();
-        page = random.nextInt() % PAGE_NUM + 1;*/
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -60,8 +50,6 @@ public class MeiziFragment extends BaseFragment {
 
     private void initView(View view){
         recyclerView = view.findViewById(R.id.recycler_view_meizi);
-        //LinearLayoutManager manager = new LinearLayoutManager(getActivity());
-        //manager.setOrientation(LinearLayoutManager.VERTICAL);
         StaggeredGridLayoutManager manager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         adapter = new MeiziAdapter(this, meiziList);
@@ -110,32 +98,32 @@ public class MeiziFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 meiziList.clear();
-                getRandomPage();
                 getMeizi();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
     }
 
-    private void getMeizi(){
-        httpUtil.get(getApi(), new HttpUtil.OnResponseHandler() {
+    private void getMeizi() {
+        httpUtil.get(API.GANHUO_FULI_RANDOM, new HttpUtil.OnResponseHandler() {
             @Override
             public void onSuccess(String content) {
-                if(!TextUtils.isEmpty(content)){
+                if (!TextUtils.isEmpty(content)) {
                     JSONObject object = JSON.parseObject(content);
-                    if(!object.getBoolean("error")){
+                    if (!object.getBoolean("error")) {
                         JSONArray array = object.getJSONArray("results");
                         List<Meizi> tmp = JSON.parseArray(array.toJSONString(), Meizi.class);
-                        if(tmp == null || tmp.size() == 0){
+                        if (tmp == null || tmp.size() == 0) {
                             showToast(getString(R.string.no_more_data));
-                        }else {
+                        } else {
                             meiziList.addAll(tmp);
+                            removeDuplicate();
                             adapter.notifyDataSetChanged();
                         }
-                    }else{
+                    } else {
                         showToast(getString(R.string.server_error));
                     }
-                }else{
+                } else {
                     showToast(getString(R.string.no_data));
                 }
             }
@@ -148,16 +136,6 @@ public class MeiziFragment extends BaseFragment {
         });
     }
 
-    /**
-     * 获取API地址,每获取一次页数+1，也就是按顺序获取，以后可随机获取
-     */
-    private String getApi(){
-        StringBuilder builder = new StringBuilder(API.GANHUO_FULI);
-        builder.append("/" + MEIZI_COUNT).append("/" + page);
-        page ++;
-        return builder.toString();
-    }
-
     private int getMaxElem(int[] arr) {
         int size = arr.length;
         int maxVal = Integer.MIN_VALUE;
@@ -166,5 +144,12 @@ public class MeiziFragment extends BaseFragment {
                 maxVal = arr[i];
         }
         return maxVal;
+    }
+
+    private void removeDuplicate(){
+        Set<Meizi> set = new LinkedHashSet<>();
+        set.addAll(meiziList);
+        meiziList.clear();
+        meiziList.addAll(set);
     }
 }

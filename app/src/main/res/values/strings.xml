@@ -13,4 +13,6 @@
     <string name="quit_app_tip">再按一次退出应用</string>
     <string name="no_more_data">没有更多了...</string>
     <string name="tttv">TTTV</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="cache_cleared">缓存已清理：</string>
 </resources>

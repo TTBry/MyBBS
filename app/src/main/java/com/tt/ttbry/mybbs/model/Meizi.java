@@ -57,4 +57,16 @@ public class Meizi {
     public void setWho(String who) {
         this.who = who;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null){
+            return false;
+        }
+        if(obj instanceof Meizi){
+            Meizi meizi = (Meizi)obj;
+            return this.getImageUrl().equals(meizi.getImageUrl());
+        }
+        return false;
+    }
 }
