@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tt.ttbry.mybbs.R;
-import com.tt.ttbry.mybbs.model.CommentBean;
-import com.tt.ttbry.mybbs.model.Duanzi;
+import com.tt.ttbry.mybbs.model.duanzi.CommentBean;
+import com.tt.ttbry.mybbs.model.duanzi.Duanzi;
 import com.tt.ttbry.mybbs.util.Check;
 
 import java.util.List;

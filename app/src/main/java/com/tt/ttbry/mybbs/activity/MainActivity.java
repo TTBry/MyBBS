@@ -20,6 +20,7 @@ import com.tt.ttbry.mybbs.fragment.DuanziFragment;
 import com.tt.ttbry.mybbs.fragment.MeiziFragment;
 import com.tt.ttbry.mybbs.fragment.NewsFragment;
 import com.tt.ttbry.mybbs.fragment.TvFragment;
+import com.tt.ttbry.mybbs.fragment.ZhihuFragment;
 import com.tt.ttbry.mybbs.util.CacheUtil;
 
 import java.util.ArrayList;
@@ -69,6 +70,9 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_meizi:
                         viewPager.setCurrentItem(3);
                         break;
+                    case R.id.nav_zhihu:
+                        viewPager.setCurrentItem(4);
+                        break;
                     default:
                         break;
                 }
@@ -91,6 +95,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new DuanziFragment());
         fragments.add(new TvFragment());
         fragments.add(new MeiziFragment());
+        fragments.add(new ZhihuFragment());
 
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments));
         viewPager.setCurrentItem(0);

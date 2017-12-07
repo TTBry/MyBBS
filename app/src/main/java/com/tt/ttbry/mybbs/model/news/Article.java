@@ -1,4 +1,4 @@
-package com.tt.ttbry.mybbs.model;
+package com.tt.ttbry.mybbs.model.news;
 
 /**
  * Created by TTBry on 2017/11/8.

@@ -28,6 +28,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="landscape"
             android:hardwareAccelerated="true"/>
+        <activity android:name=".activity.ZhihuArticleActivity" />
     </application>
 
 </manifest>

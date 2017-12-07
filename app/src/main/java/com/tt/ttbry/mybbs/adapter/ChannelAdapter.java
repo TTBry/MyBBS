@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.activity.TvActivity;
-import com.tt.ttbry.mybbs.model.Channel;
+import com.tt.ttbry.mybbs.model.tttv.Channel;
 
 import java.io.Serializable;
 import java.util.List;

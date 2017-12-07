@@ -1,4 +1,4 @@
-package com.tt.ttbry.mybbs.model;
+package com.tt.ttbry.mybbs.model.duanzi;
 
 import com.alibaba.fastjson.annotation.JSONField;
 

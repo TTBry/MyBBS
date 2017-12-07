@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.DuanziAdapter;
 import com.tt.ttbry.mybbs.config.API;
-import com.tt.ttbry.mybbs.model.Duanzi;
+import com.tt.ttbry.mybbs.model.duanzi.Duanzi;
 import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;

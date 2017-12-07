@@ -16,7 +16,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.MeiziAdapter;
 import com.tt.ttbry.mybbs.config.API;
-import com.tt.ttbry.mybbs.model.Meizi;
+import com.tt.ttbry.mybbs.model.meizi.Meizi;
 import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;

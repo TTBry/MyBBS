@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.tt.ttbry.mybbs.R;
-import com.tt.ttbry.mybbs.model.Channel;
+import com.tt.ttbry.mybbs.model.tttv.Channel;
 import com.tt.ttbry.mybbs.view.TttvVideoPlayer;
 
 import java.util.List;

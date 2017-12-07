@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.ArticleAdapter;
 import com.tt.ttbry.mybbs.config.API;
-import com.tt.ttbry.mybbs.model.Article;
+import com.tt.ttbry.mybbs.model.news.Article;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

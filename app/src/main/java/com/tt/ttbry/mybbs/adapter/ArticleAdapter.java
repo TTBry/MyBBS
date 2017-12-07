@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.tt.ttbry.mybbs.R;
-import com.tt.ttbry.mybbs.model.Article;
+import com.tt.ttbry.mybbs.model.news.Article;
 import com.tt.ttbry.mybbs.activity.TieActivity;
 
 import java.util.List;

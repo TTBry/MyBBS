@@ -1,6 +1,9 @@
 package com.tt.ttbry.mybbs.activity;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -18,6 +21,7 @@ public class TieActivity extends BaseActivity {
     private WebView webView;
     private String url;
     private List<String> urlHistories = new ArrayList<>();
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,13 @@ public class TieActivity extends BaseActivity {
     }
 
     private void initView(){
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         webView = findViewById(R.id.web_view);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(false);
@@ -51,20 +62,15 @@ public class TieActivity extends BaseActivity {
         urlHistories.add(url);
     }
 
-    /*@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
-            if(webView != null){
-                if(urlHistories.size() > 0){
-                    urlHistories.remove(urlHistories.size() - 1);
-                    if(urlHistories.size() > 0) {
-                        webView.loadUrl(urlHistories.get(urlHistories.size() - 1));
-                    }
-                }
-            }else{
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
                 finish();
-            }
+                break;
+            default:
+                break;
         }
-        return true;
-    }*/
+        return super.onOptionsItemSelected(item);
+    }
 }

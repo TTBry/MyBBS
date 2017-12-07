@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.tt.ttbry.mybbs.R;
-import com.tt.ttbry.mybbs.model.Meizi;
+import com.tt.ttbry.mybbs.model.meizi.Meizi;
 import com.tt.ttbry.mybbs.activity.DetailActivity;
 
 import java.util.ArrayList;

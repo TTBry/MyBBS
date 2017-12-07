@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.ChannelAdapter;
 import com.tt.ttbry.mybbs.config.API;
-import com.tt.ttbry.mybbs.model.Channel;
+import com.tt.ttbry.mybbs.model.tttv.Channel;
 import com.tt.ttbry.mybbs.util.HttpUtil;
 
 import java.util.ArrayList;
