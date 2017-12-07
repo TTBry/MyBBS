@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.github.lazylibrary.util.DataCleanManager;
 import com.tt.ttbry.mybbs.R;
+import com.tt.ttbry.mybbs.adapter.MyFragmentPagerAdapter;
 import com.tt.ttbry.mybbs.fragment.DuanziFragment;
 import com.tt.ttbry.mybbs.fragment.MeiziFragment;
 import com.tt.ttbry.mybbs.fragment.NewsFragment;
@@ -27,6 +29,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private ImageView navHeaderImage;
     private List<Fragment> fragments;
+    private ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,6 @@ public class MainActivity extends BaseActivity {
 
         initView();
         initFragment();
-        showFragment(0);
-
     }
 
     private void initView(){
@@ -57,16 +58,16 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_news:
-                        showFragment(0);
+                        viewPager.setCurrentItem(0);
                         break;
                     case R.id.nav_duanzi:
-                        showFragment(1);
+                        viewPager.setCurrentItem(1);
                         break;
                     case R.id.nav_tv:
-                        showFragment(2);
+                        viewPager.setCurrentItem(2);
                         break;
                     case R.id.nav_meizi:
-                        showFragment(3);
+                        viewPager.setCurrentItem(3);
                         break;
                     default:
                         break;
@@ -84,34 +85,17 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initFragment(){
+        viewPager = findViewById(R.id.view_pager);
         fragments = new ArrayList<>();
         fragments.add(new NewsFragment());
         fragments.add(new DuanziFragment());
         fragments.add(new TvFragment());
         fragments.add(new MeiziFragment());
 
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        for(Fragment fragment : fragments) {
-            transaction.add(R.id.fragment_layout, fragment);
-        }
-        hideAllFragments(transaction);
-        transaction.commit();
+        viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments));
+        viewPager.setCurrentItem(0);
     }
 
-    private void hideAllFragments(FragmentTransaction transaction){
-        for(Fragment fragment : fragments){
-            if(fragment != null){
-                transaction.hide(fragment);
-            }
-        }
-    }
-
-    private void showFragment(int position){
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        hideAllFragments(transaction);
-        transaction.show(fragments.get(position));
-        transaction.commit();
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -143,6 +127,7 @@ public class MainActivity extends BaseActivity {
     private void clearCache(){
         try {
             String cacheSize = CacheUtil.getTotalCacheSize(this);
+            DataCleanManager.cleanApplicationData(getApplication());
             CacheUtil.clearAllCache(this);
             showToast(getString(R.string.cache_cleared) + cacheSize);
         }catch (Exception e){

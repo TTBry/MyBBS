@@ -66,6 +66,7 @@ public class TvActivity extends BaseActivity {
     }
 
     private void setUpVideoPlayer(){
+        JZVideoPlayer.releaseAllVideos();
         JZVideoPlayer.FULLSCREEN_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         JZVideoPlayer.NORMAL_ORIENTATION = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
         videoPlayer.setUp(channelList.get(position).getChannelAddress()
