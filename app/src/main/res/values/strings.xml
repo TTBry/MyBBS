@@ -16,4 +16,5 @@
     <string name="clear_cache">清理缓存</string>
     <string name="cache_cleared">缓存已清理：</string>
     <string name="nav_title_zhihu">知乎日报</string>
+    <string name="nav_title_meiju">看剧</string>
 </resources>

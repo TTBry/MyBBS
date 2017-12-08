@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -74,7 +75,7 @@ public class ZhihuFragment extends BaseFragment {
                 topStories.clear();
                 getNews();
                 swipeRefreshLayout.setRefreshing(false);
-                if(timer == null){
+                if(timer != null){
                     timer.cancel();
                     timer = null;
                 }
@@ -84,16 +85,7 @@ public class ZhihuFragment extends BaseFragment {
         viewPager = view.findViewById(R.id.view_pager);
         viewPager.setAdapter(pagerAdapter);
         viewPager.setOnPageChangeListener(onPageChangeListener);
-        //viewPager.setOnTouchListener(onTouchListener);
-        viewPager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putInt("id", topStories.get(index).getId());
-                Intent intent = new Intent(getActivity(), ZhihuArticleActivity.class);
-                startActivity(intent);
-            }
-        });
+        viewPager.setOnTouchListener(onTouchListener);
     }
 
     private void startTimer(){
@@ -152,21 +144,42 @@ public class ZhihuFragment extends BaseFragment {
         }
     };
 
-    /*View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+    View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+
+        private long downTime;
+        private int downX;
         @Override
         public boolean onTouch(View view, MotionEvent event) {
             switch (event.getAction()){
                 //手指按下和划动的时候停止图片的轮播
-                case MotionEvent.ACTION_DOWN:
                 case MotionEvent.ACTION_MOVE:
                     isContinue = false;
                     break;
+                case MotionEvent.ACTION_DOWN:
+                    isContinue = false;
+
+                    downX = (int)event.getX();
+                    downTime = System.currentTimeMillis();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    long now = System.currentTimeMillis();
+                    int nowX = (int) event.getX();
+                    if(now - downTime < 500 && Math.abs(downX - nowX) < 30){
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("id", topStories.get(index).getId());
+                        Intent intent = new Intent(getActivity(), ZhihuArticleActivity.class);
+                        intent.putExtras(bundle);
+                        getActivity().startActivity(intent);
+                    }
+                    isContinue = true;
+                    break;
                 default:
                     isContinue = true;
+                    break;
             }
-            return false;
+            return true;
         }
-    };*/
+    };
 
     ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override

@@ -18,6 +18,10 @@
             android:icon="@drawable/nav_zhihu"
             android:title="@string/nav_title_zhihu" />
         <item
+            android:id="@+id/nav_meiju"
+            android:icon="@drawable/nav_meiju"
+            android:title="@string/nav_title_meiju" />
+        <item
             android:id="@+id/nav_meizi"
             android:icon="@drawable/nav_meizi"
             android:title="@string/nav_title_meizi" />

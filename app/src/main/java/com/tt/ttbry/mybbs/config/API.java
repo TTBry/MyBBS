@@ -1,7 +1,5 @@
 package com.tt.ttbry.mybbs.config;
 
-import java.util.List;
-
 /**
  * Created by TTBry on 2017/11/8.
  */
@@ -37,115 +35,6 @@ public class API {
     //获取消息内容: 使用在 ZHIHU_GET_NEWS_LATEST 中获得的 id，拼接在 ZHIHU_GET_NEWS_CONTENT 后
     public static final String ZHIHU_GET_NEWS_CONTENT = "https://news-at.zhihu.com/api/4/news/";
 
-    public static class StoriesBean {
-        /**
-         * images : ["https://pic4.zhimg.com/v2-55447e90bd6daecf56352030ea93efdb.jpg"]
-         * type : 0
-         * id : 9659520
-         * ga_prefix : 120714
-         * title : 知道哪些法律小常识，可以在职场中保护自己？
-         */
-
-        private int type;
-        private int id;
-        private String ga_prefix;
-        private String title;
-        private List<String> images;
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getGa_prefix() {
-            return ga_prefix;
-        }
-
-        public void setGa_prefix(String ga_prefix) {
-            this.ga_prefix = ga_prefix;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public List<String> getImages() {
-            return images;
-        }
-
-        public void setImages(List<String> images) {
-            this.images = images;
-        }
-    }
-
-    public static class TopStoriesBean {
-        /**
-         * image : https://pic2.zhimg.com/v2-9ddf40f985f7892c6f5add67e1a4dea5.jpg
-         * type : 0
-         * id : 9660035
-         * ga_prefix : 120710
-         * title : 你平时习惯蹲坑 or 马桶？来看看谁更不卫生吧
-         */
-
-        private String image;
-        private int type;
-        private int id;
-        private String ga_prefix;
-        private String title;
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String image) {
-            this.image = image;
-        }
-
-        public int getType() {
-            return type;
-        }
-
-        public void setType(int type) {
-            this.type = type;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getGa_prefix() {
-            return ga_prefix;
-        }
-
-        public void setGa_prefix(String ga_prefix) {
-            this.ga_prefix = ga_prefix;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-    }
+    //Neets.cc网址
+    public static final String NEETS_CC = "http://neets.cc";
 }

@@ -17,6 +17,7 @@ import com.github.lazylibrary.util.DataCleanManager;
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.adapter.MyFragmentPagerAdapter;
 import com.tt.ttbry.mybbs.fragment.DuanziFragment;
+import com.tt.ttbry.mybbs.fragment.MeijuFragment;
 import com.tt.ttbry.mybbs.fragment.MeiziFragment;
 import com.tt.ttbry.mybbs.fragment.NewsFragment;
 import com.tt.ttbry.mybbs.fragment.TvFragment;
@@ -67,11 +68,14 @@ public class MainActivity extends BaseActivity {
                     case R.id.nav_tv:
                         viewPager.setCurrentItem(2);
                         break;
-                    case R.id.nav_meizi:
+                    case R.id.nav_zhihu:
                         viewPager.setCurrentItem(3);
                         break;
-                    case R.id.nav_zhihu:
+                    case R.id.nav_meiju:
                         viewPager.setCurrentItem(4);
+                        break;
+                    case R.id.nav_meizi:
+                        viewPager.setCurrentItem(5);
                         break;
                     default:
                         break;
@@ -94,8 +98,9 @@ public class MainActivity extends BaseActivity {
         fragments.add(new NewsFragment());
         fragments.add(new DuanziFragment());
         fragments.add(new TvFragment());
-        fragments.add(new MeiziFragment());
         fragments.add(new ZhihuFragment());
+        fragments.add(new MeijuFragment());
+        fragments.add(new MeiziFragment());
 
         viewPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragments));
         viewPager.setCurrentItem(0);
