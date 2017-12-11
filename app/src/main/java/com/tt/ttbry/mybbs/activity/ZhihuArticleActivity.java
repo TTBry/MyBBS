@@ -5,9 +5,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.alibaba.fastjson.JSON;
 import com.tt.ttbry.mybbs.R;
@@ -15,6 +12,7 @@ import com.tt.ttbry.mybbs.config.API;
 import com.tt.ttbry.mybbs.model.zhihu.ZhihuArticle;
 import com.tt.ttbry.mybbs.util.Check;
 import com.tt.ttbry.mybbs.util.HttpUtil;
+import com.tt.ttbry.mybbs.view.MyWebView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,8 +24,8 @@ import org.jsoup.select.Elements;
 
 public class ZhihuArticleActivity extends BaseActivity {
     private ZhihuArticle article;
-    private WebView webView;
     private Toolbar toolbar;
+    private MyWebView webView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,7 +52,7 @@ public class ZhihuArticleActivity extends BaseActivity {
         }
 
         webView = findViewById(R.id.web_view);
-        webView.setHorizontalScrollBarEnabled(false);
+        /*webView.setHorizontalScrollBarEnabled(false);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDefaultTextEncodingName("UTF-8");
@@ -64,7 +62,7 @@ public class ZhihuArticleActivity extends BaseActivity {
                 view.loadUrl(url1);
                 return true;
             }
-        });
+        });*/
     }
 
     private void getArticleById(int id){
@@ -106,5 +104,14 @@ public class ZhihuArticleActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(webView != null && webView.canGoBack()){
+            webView.goBack();
+        }else{
+            finish();
+        }
     }
 }

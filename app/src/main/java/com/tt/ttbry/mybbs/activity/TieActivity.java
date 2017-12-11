@@ -4,23 +4,17 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.tt.ttbry.mybbs.R;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.tt.ttbry.mybbs.view.MyWebView;
 
 /**
  * Created by TTBry on 2017/11/8.
  */
 
 public class TieActivity extends BaseActivity {
-    private WebView webView;
+    private MyWebView webView;
     private String url;
-    private List<String> urlHistories = new ArrayList<>();
     private Toolbar toolbar;
 
     @Override
@@ -47,19 +41,8 @@ public class TieActivity extends BaseActivity {
         }
 
         webView = findViewById(R.id.web_view);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(false);
-        webView.setWebViewClient(new WebViewClient(){
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url1) {
-                urlHistories.add(url1);
-                view.loadUrl(url1);
-                return true;
-            }
-        });
         webView.loadUrl(url);
-        urlHistories.add(url);
+
     }
 
     @Override
@@ -72,5 +55,14 @@ public class TieActivity extends BaseActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(webView != null && webView.canGoBack()){
+            webView.goBack();
+        }else{
+            finish();
+        }
     }
 }

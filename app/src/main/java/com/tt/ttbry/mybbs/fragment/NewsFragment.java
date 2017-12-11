@@ -41,7 +41,6 @@ public class NewsFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.new_fragment_layout, container, false);
-
         initView(view);
         getArticles();
 

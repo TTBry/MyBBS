@@ -1,26 +1,28 @@
 package com.tt.ttbry.mybbs.fragment;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.tt.ttbry.mybbs.R;
 import com.tt.ttbry.mybbs.config.API;
+import com.tt.ttbry.mybbs.view.MyWebView;
 
 /**
  * Created by TTBry on 2017/12/8.
  */
 
 public class MeijuFragment extends BaseFragment {
-    private WebView webView;
     private FloatingActionButton btnMain;
+    private MyWebView webView;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Nullable
     @Override
@@ -32,23 +34,14 @@ public class MeijuFragment extends BaseFragment {
 
     private void initView(View view){
         webView = view.findViewById(R.id.web_view);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setMediaPlaybackRequiresUserGesture(true);
-        settings.setUseWideViewPort(true);
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setPluginState(WebSettings.PluginState.ON);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-        }
-        webView.setWebViewClient(new WebViewClient(){
 
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url1) {
-                view.loadUrl(url1);
-                return true;
-            }
-        });
+        if(webView.getX5WebViewExtension() != null) {
+            Bundle data = new Bundle();
+            data.putBoolean("standardFullScreen", false);
+            data.putBoolean("supportLiteWnd", false);
+            data.putInt("DefaultVideoScreen", 1);
+            webView.getX5WebViewExtension().invokeMiscMethod("setVideoParams", data);
+        }
         webView.loadUrl(API.NEETS_CC);
 
         btnMain = view.findViewById(R.id.btn_main);
@@ -58,6 +51,21 @@ public class MeijuFragment extends BaseFragment {
                 webView.loadUrl(API.NEETS_CC);
             }
         });
+    }
+
+    private long lastPressedTime = 0;
+    public void goBack(){
+        if(webView != null && webView.canGoBack()){
+            webView.goBack();
+        }else{
+            long now = System.currentTimeMillis();
+            if ((now - lastPressedTime) < 2 * 1000) {
+                getActivity().finish();
+            } else {
+                showToast(getString(R.string.quit_app_tip));
+                lastPressedTime = now;
+            }
+        }
     }
 
 }

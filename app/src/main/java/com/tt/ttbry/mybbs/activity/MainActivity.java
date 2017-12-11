@@ -28,6 +28,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends BaseActivity {
+    public static final int PAGE_NEWS = 0;//新闻
+    public static final int PAGE_DUANZI = 1;//段子
+    public static final int PAGE_TV = 2;//TV
+    public static final int PAGE_ZHIHU = 3;//知乎日报
+    public static final int PAGE_MEIJU = 4;//看剧
+    public static final int PAGE_MEIZI = 5;//妹子
+
     private DrawerLayout drawerLayout;
     private ImageView navHeaderImage;
     private List<Fragment> fragments;
@@ -60,22 +67,22 @@ public class MainActivity extends BaseActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_news:
-                        viewPager.setCurrentItem(0);
+                        viewPager.setCurrentItem(PAGE_NEWS);
                         break;
                     case R.id.nav_duanzi:
-                        viewPager.setCurrentItem(1);
+                        viewPager.setCurrentItem(PAGE_DUANZI);
                         break;
                     case R.id.nav_tv:
-                        viewPager.setCurrentItem(2);
+                        viewPager.setCurrentItem(PAGE_TV);
                         break;
                     case R.id.nav_zhihu:
-                        viewPager.setCurrentItem(3);
+                        viewPager.setCurrentItem(PAGE_ZHIHU);
                         break;
                     case R.id.nav_meiju:
-                        viewPager.setCurrentItem(4);
+                        viewPager.setCurrentItem(PAGE_MEIJU);
                         break;
                     case R.id.nav_meizi:
-                        viewPager.setCurrentItem(5);
+                        viewPager.setCurrentItem(PAGE_MEIZI);
                         break;
                     default:
                         break;
@@ -125,12 +132,20 @@ public class MainActivity extends BaseActivity {
     private long lastPressedTime = 0;
     @Override
     public void onBackPressed() {
-        long now = System.currentTimeMillis();
-        if((now - lastPressedTime ) < 2 * 1000){
-            finish();
-        }else{
-            showToast(getString(R.string.quit_app_tip));
-            lastPressedTime = now;
+        switch (viewPager.getCurrentItem()){
+            case PAGE_MEIJU:
+                MeijuFragment fragment = (MeijuFragment) fragments.get(4);
+                fragment.goBack();
+                break;
+            default:
+                long now = System.currentTimeMillis();
+                if ((now - lastPressedTime) < 2 * 1000) {
+                    finish();
+                } else {
+                    showToast(getString(R.string.quit_app_tip));
+                    lastPressedTime = now;
+                }
+                break;
         }
     }
 
