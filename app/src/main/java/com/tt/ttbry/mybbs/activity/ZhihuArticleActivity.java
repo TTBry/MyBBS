@@ -52,17 +52,6 @@ public class ZhihuArticleActivity extends BaseActivity {
         }
 
         webView = findViewById(R.id.web_view);
-        /*webView.setHorizontalScrollBarEnabled(false);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDefaultTextEncodingName("UTF-8");
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url1) {
-                view.loadUrl(url1);
-                return true;
-            }
-        });*/
     }
 
     private void getArticleById(int id){
@@ -112,6 +101,16 @@ public class ZhihuArticleActivity extends BaseActivity {
             webView.goBack();
         }else{
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if(webView != null){
+            webView.removeAllViews();
+            webView.destroy();
         }
     }
 }

@@ -41,6 +41,7 @@ public class TieActivity extends BaseActivity {
         }
 
         webView = findViewById(R.id.web_view);
+        webView.getSettings().setJavaScriptEnabled(false);
         webView.loadUrl(url);
 
     }
@@ -63,6 +64,15 @@ public class TieActivity extends BaseActivity {
             webView.goBack();
         }else{
             finish();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(webView != null){
+            webView.removeAllViews();
+            webView.destroy();
         }
     }
 }

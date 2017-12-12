@@ -4,6 +4,9 @@ import android.app.Application;
 import android.util.Log;
 
 import com.tencent.smtt.sdk.QbSdk;
+import com.tt.ttbry.mybbs.event.QbSdkInitFinishedEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * Created by TTBry on 2017/12/11.
@@ -18,7 +21,8 @@ public class MyApplication extends Application {
         QbSdk.initX5Environment(this, new QbSdk.PreInitCallback() {
             @Override
             public void onCoreInitFinished() {
-                //x5内核初始化完成回调接口，此接口回调并表示已经加载起来了x5，有可能特殊情况下x5内核加
+                //x5内核初始化完成回调接口，此接口回调并表示已经加载起来了x5，有可能特殊情况下x5内核加载失败
+                EventBus.getDefault().post(new QbSdkInitFinishedEvent());
             }
 
             @Override

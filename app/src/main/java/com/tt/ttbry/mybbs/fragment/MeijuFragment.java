@@ -2,7 +2,6 @@ package com.tt.ttbry.mybbs.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +15,8 @@ import com.tt.ttbry.mybbs.view.MyWebView;
  */
 
 public class MeijuFragment extends BaseFragment {
-    private FloatingActionButton btnMain;
     private MyWebView webView;
+    private View view;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class MeijuFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.meiju_fragment_layout, container, false);
+        view = inflater.inflate(R.layout.meiju_fragment_layout, container, false);
         initView(view);
         return view;
     }
@@ -43,14 +42,6 @@ public class MeijuFragment extends BaseFragment {
             webView.getX5WebViewExtension().invokeMiscMethod("setVideoParams", data);
         }
         webView.loadUrl(API.NEETS_CC);
-
-        btnMain = view.findViewById(R.id.btn_main);
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                webView.loadUrl(API.NEETS_CC);
-            }
-        });
     }
 
     private long lastPressedTime = 0;
@@ -68,4 +59,12 @@ public class MeijuFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(webView != null){
+            webView.removeAllViews();
+            webView.destroy();
+        }
+    }
 }
